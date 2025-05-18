@@ -182,7 +182,7 @@ void menu() {
     do {
         system("cls"); // Membersihkan layar (hanya di Windows)
 
-        cout << "\n===== Menu Manajemen Liga =====\n";
+        cout << "===== Menu Manajemen Liga =====\n";
         cout << "1. Tambah Tim\n";
         cout << "2. Tambah Pertandingan\n";
         cout << "3. Tampilkan Klasemen\n";
