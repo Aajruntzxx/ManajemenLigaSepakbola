@@ -6,5 +6,5 @@
 - Input dan update hasil skor
 
 ## Penulis
-Ajrun Ramadhan/123240254
-Muhammad Fatkhan Kurniadi/123240253
+- Ajrun Ramadhan/123240254
+- Muhammad Fatkhan Kurniadi/123240253
