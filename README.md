@@ -8,6 +8,6 @@ Menu Utama
 - Mencari dan menampilkan detail sebuah tim
 - Menyimpan dan memuat data tim ke/dari file menggunakan operasi file `fopen`, `fprintf`, dan `fscanf`
 
-# Muhammad Fatkhan Kurniadi / 123240253
-# Ajrun Ramadhan / 123240254
+- Muhammad Fatkhan Kurniadi / 123240253
+- Ajrun Ramadhan / 123240254
 
