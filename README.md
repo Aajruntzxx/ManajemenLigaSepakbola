@@ -1,5 +1,8 @@
 # Program Manajemen Liga Sepak Bola
 
+- Muhammad Fatkhan Kurniadi / 123240253
+- Ajrun Ramadhan / 123240254
+  
 Menu Utama
 
 - Menambah tim baru
@@ -7,7 +10,4 @@ Menu Utama
 - Menampilkan klasemen liga berdasarkan poin
 - Mencari dan menampilkan detail sebuah tim
 - Menyimpan dan memuat data tim ke/dari file menggunakan operasi file `fopen`, `fprintf`, dan `fscanf`
-
-- Muhammad Fatkhan Kurniadi / 123240253
-- Ajrun Ramadhan / 123240254
 
