@@ -80,8 +80,10 @@ void BacaDariFile() {
 }
 
 void tambahTim() {
+    system("cls");
     if (jumlahTim >= MAKS_TIM) {
         cout << "Jumlah tim sudah maksimal.\n";
+        system("pause");
         return;
     }
 
@@ -91,15 +93,18 @@ void tambahTim() {
 
     if (cariTim(daftarTim[jumlahTim].nama) != -1) {
         cout << "Tim sudah terdaftar.\n";
+        system("pause");
         return;
     }
 
     jumlahTim++;
     cout << "Tim berhasil ditambahkan.\n";
     simpanKeFile();
+    system("pause");
 }
 
 void tambahPertandingan() {
+    system("cls");
     char tim1[50], tim2[50];
     int skor1, skor2;
 
@@ -118,6 +123,7 @@ void tambahPertandingan() {
 
     if (i1 == -1 || i2 == -1) {
         cout << "Salah satu tim tidak ditemukan.\n";
+        system("pause");
         return;
     }
 
@@ -142,11 +148,15 @@ void tambahPertandingan() {
     }
 
     cout << "Hasil pertandingan ditambahkan.\n";
+    
     simpanKeFile();
+
+    system("pause");
 }
 
 void tampilKlasemen() {
-    // Bubble sort berdasarkan poin
+    system("cls");
+
     for (int i = 0; i < jumlahTim - 1; ++i) {
         for (int j = 0; j < jumlahTim - i - 1; ++j) {
             if (daftarTim[j].poin < daftarTim[j+1].poin) {
@@ -157,7 +167,7 @@ void tampilKlasemen() {
         }
     }
 
-    cout << "\n--- Klasemen Liga ---\n";
+    cout << "\n===== Klasemen Liga =====\n";
     cout << "Tim\t\tMain Menang Seri Kalah Gol Poin\n";
     for (int i = 0; i < jumlahTim; ++i) {
         Tim* t = &daftarTim[i];
@@ -169,9 +179,13 @@ void tampilKlasemen() {
              << t->golMasuk << "-" << t->golKemasukan << "  "
              << t->poin << "\n";
     }
+    cout << "=======================================\n";
+
+    system("pause");
 }
 
 void cariDanTampilkanTim() {
+    system("cls");
     char namaCari[50];
     cout << "Masukkan nama tim yang dicari: ";
     cin.ignore();
@@ -182,7 +196,7 @@ void cariDanTampilkanTim() {
         cout << "Tim tidak ditemukan.\n";
     } else {
         Tim* t = &daftarTim[idx];
-        cout << "\n--- Detail Tim: " << t->nama << " ---\n";
+        cout << "\nDetail Tim : " << t->nama << " \n";
         cout << "Main       : " << t->main << "\n";
         cout << "Menang     : " << t->menang << "\n";
         cout << "Seri       : " << t->seri << "\n";
@@ -190,11 +204,14 @@ void cariDanTampilkanTim() {
         cout << "Gol        : " << t->golMasuk << " - " << t->golKemasukan << "\n";
         cout << "Poin       : " << t->poin << "\n";
     }
+
+    system("pause");
 }
 
 void menu() {
     int pilihan;
     do {
+        system("cls");
         cout << "\n===== Menu Manajemen Liga =====\n";
         cout << "1. Tambah Tim\n";
         cout << "2. Tambah Pertandingan\n";
@@ -205,18 +222,31 @@ void menu() {
         cin >> pilihan;
 
         switch (pilihan) {
-            case 1: tambahTim(); break;
-            case 2: tambahPertandingan(); break;
-            case 3: tampilKlasemen(); break;
-            case 4: cariDanTampilkanTim(); break;
-            case 0: cout << "Keluar dari program.\n"; break;
-            default: cout << "Pilihan tidak valid.\n";
+            case 1: 
+              tambahTim(); 
+              break;
+            case 2: 
+              tambahPertandingan(); 
+              break;
+            case 3: 
+              tampilKlasemen(); 
+              break;
+            case 4: 
+              cariDanTampilkanTim(); 
+              break;
+            case 0: 
+              cout << "Keluar dari program.\n"; 
+              break;
+            default: 
+              cout << "Pilihan tidak valid.\n"; 
+              system("pause");
         }
+
     } while (pilihan != 0);
 }
 
 int main() {
-    BacaDariFile(); // Baca data 
+    BacaDariFile();
     menu();
     return 0;
 }
