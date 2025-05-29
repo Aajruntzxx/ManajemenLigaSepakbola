@@ -148,9 +148,7 @@ void tambahPertandingan() {
     }
 
     cout << "Hasil pertandingan ditambahkan.\n";
-    
     simpanKeFile();
-
     system("pause");
 }
 
@@ -180,7 +178,6 @@ void tampilKlasemen() {
              << t->poin << "\n";
     }
     cout << "=======================================\n";
-
     system("pause");
 }
 
@@ -204,7 +201,60 @@ void cariDanTampilkanTim() {
         cout << "Gol        : " << t->golMasuk << " - " << t->golKemasukan << "\n";
         cout << "Poin       : " << t->poin << "\n";
     }
+    system("pause");
+}
 
+void editTim() {
+    system("cls");
+    char namaLama[50];
+    cout << "Masukkan nama tim yang ingin diedit: ";
+    cin.ignore();
+    cin.getline(namaLama, 50);
+
+    int idx = cariTim(namaLama);
+    if (idx == -1) {
+        cout << "Tim tidak ditemukan.\n";
+        system("pause");
+        return;
+    }
+
+    cout << "Masukkan nama baru untuk tim \"" << namaLama << "\": ";
+    char namaBaru[50];
+    cin.getline(namaBaru, 50);
+
+    if (cariTim(namaBaru) != -1) {
+        cout << "Nama tim sudah digunakan.\n";
+        system("pause");
+        return;
+    }
+
+    strcpy(daftarTim[idx].nama, namaBaru);
+    cout << "Nama tim berhasil diubah.\n";
+    simpanKeFile();
+    system("pause");
+}
+
+void hapusTim() {
+    system("cls");
+    char namaHapus[50];
+    cout << "Masukkan nama tim yang ingin dihapus: ";
+    cin.ignore();
+    cin.getline(namaHapus, 50);
+
+    int idx = cariTim(namaHapus);
+    if (idx == -1) {
+        cout << "Tim tidak ditemukan.\n";
+        system("pause");
+        return;
+    }
+
+    for (int i = idx; i < jumlahTim - 1; i++) {
+        daftarTim[i] = daftarTim[i + 1];
+    }
+    jumlahTim--;
+
+    cout << "Tim berhasil dihapus.\n";
+    simpanKeFile();
     system("pause");
 }
 
@@ -217,6 +267,8 @@ void menu() {
         cout << "2. Tambah Pertandingan\n";
         cout << "3. Tampilkan Klasemen\n";
         cout << "4. Cari Tim\n";
+        cout << "5. Edit Tim\n";
+        cout << "6. Hapus Tim\n";
         cout << "0. Keluar\n";
         cout << "Pilihan: ";
         cin >> pilihan;
@@ -233,6 +285,12 @@ void menu() {
               break;
             case 4: 
               cariDanTampilkanTim(); 
+              break;
+            case 5: 
+              editTim(); 
+              break;
+            case 6: 
+              hapusTim(); 
               break;
             case 0: 
               cout << "Keluar dari program.\n"; 
