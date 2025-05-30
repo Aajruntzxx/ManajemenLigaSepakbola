@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdio>
 #include <cstring>
+#include <iomanip> 
 
 using namespace std;
 
@@ -152,32 +153,40 @@ void tambahPertandingan() {
     system("pause");
 }
 
+
 void tampilKlasemen() {
     system("cls");
 
     for (int i = 0; i < jumlahTim - 1; ++i) {
         for (int j = 0; j < jumlahTim - i - 1; ++j) {
-            if (daftarTim[j].poin < daftarTim[j+1].poin) {
+            if (daftarTim[j].poin < daftarTim[j + 1].poin) {
                 Tim temp = daftarTim[j];
-                daftarTim[j] = daftarTim[j+1];
-                daftarTim[j+1] = temp;
+                daftarTim[j] = daftarTim[j + 1];
+                daftarTim[j + 1] = temp;
             }
         }
     }
 
     cout << "\n===== Klasemen Liga =====\n";
-    cout << "Tim\t\tMain Menang Seri Kalah Gol Poin\n";
+    cout << left << setw(20) << "Tim"
+         << right << setw(6) << "Main"
+         << setw(8) << "Menang"
+         << setw(6) << "Seri"
+         << setw(7) << "Kalah"
+         << setw(10) << "Gol"
+         << setw(6) << "Poin" << endl;
+
     for (int i = 0; i < jumlahTim; ++i) {
         Tim* t = &daftarTim[i];
-        cout << t->nama << "\t\t"
-             << t->main << "    "
-             << t->menang << "     "
-             << t->seri << "     "
-             << t->kalah << "     "
-             << t->golMasuk << "-" << t->golKemasukan << "  "
-             << t->poin << "\n";
+        cout << left << setw(20) << t->nama
+             << right << setw(6) << t->main
+             << setw(8) << t->menang
+             << setw(6) << t->seri
+             << setw(7) << t->kalah
+             << setw(5) << t->golMasuk << "-" << setw(4) << t->golKemasukan
+             << setw(6) << t->poin << endl;
     }
-    cout << "=======================================\n";
+    cout << "===============================================\n";
     system("pause");
 }
 

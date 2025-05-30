@@ -1,3 +1,6 @@
-Barcelona;2;2;0;0;5;3;6
-Real Madrid;1;0;0;1;2;3;0
-Arsenal;1;0;0;1;1;2;0
+Chelsea;0;0;0;0;0;0;0
+Barcelona;0;0;0;0;0;0;0
+Real Madrid;0;0;0;0;0;0;0
+Manchester United;0;0;0;0;0;0;0
+Atletco Madrid;0;0;0;0;0;0;0
+Juventus;0;0;0;0;0;0;0
