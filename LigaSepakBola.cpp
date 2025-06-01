@@ -88,6 +88,7 @@ void tambahTim() {
         return;
     }
 
+    cout << "===== TAMBAH DAFTAR TIM =====\n";
     cout << "Masukkan nama tim: ";
     cin.ignore();
     cin.getline(daftarTim[jumlahTim].nama, 50);
@@ -109,6 +110,7 @@ void tambahPertandingan() {
     char tim1[50], tim2[50];
     int skor1, skor2;
 
+    cout << "===== MENAMBAHKAN PERTANDINGAN =====\n";
     cout << "Nama tim 1: ";
     cin.ignore();
     cin.getline(tim1, 50);
@@ -183,7 +185,7 @@ void tampilKlasemen() {
              << setw(8) << t->menang
              << setw(6) << t->seri
              << setw(7) << t->kalah
-             << setw(5) << t->golMasuk << "-" << setw(4) << t->golKemasukan
+             << setw(5) << t->golMasuk << " " << setw(4) << t->golKemasukan
              << setw(6) << t->poin << endl;
     }
     cout << "===============================================\n";
@@ -193,6 +195,7 @@ void tampilKlasemen() {
 void cariDanTampilkanTim() {
     system("cls");
     char namaCari[50];
+    cout << "===== MENCARI TIM =====\n";
     cout << "Masukkan nama tim yang dicari: ";
     cin.ignore();
     cin.getline(namaCari, 50);
@@ -216,6 +219,7 @@ void cariDanTampilkanTim() {
 void editTim() {
     system("cls");
     char namaLama[50];
+    cout << " ===== MENGEDIT TIM =====\n";
     cout << "Masukkan nama tim yang ingin diedit: ";
     cin.ignore();
     cin.getline(namaLama, 50);
@@ -246,6 +250,7 @@ void editTim() {
 void hapusTim() {
     system("cls");
     char namaHapus[50];
+    cout << " ===== HAPUS TIM ===== \n";
     cout << "Masukkan nama tim yang ingin dihapus: ";
     cin.ignore();
     cin.getline(namaHapus, 50);
