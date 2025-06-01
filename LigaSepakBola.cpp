@@ -48,7 +48,7 @@ int cariTim(const char nama[]) {
     return -1;
 }
 
-// Fungsi cari pemain dalam tim tertentu berdasarkan nama
+// Fungsi cari pemain dalam tim berdasarkan nama
 int cariPemain(Tim& tim, const char nama[]) {
     for (int i = 0; i < tim.jumlahPemain; ++i) {
         if (strcmp(nama, tim.daftarPemain[i].nama) == 0) {
@@ -94,7 +94,6 @@ void simpanKeFile() {
     fclose(fp);
 }
 
-// Membaca data tim dan pemain dari file
 void BacaDariFile() {
     FILE* fp = fopen("tim.txt", "r");
     if (fp == NULL) {
@@ -343,7 +342,6 @@ void hapusPelatih() {
     system("pause");
 }
 
-// Tambah pemain ke tim tertentu
 void tambahPemain() {
     system("cls");
     if (jumlahTim == 0) {
@@ -402,7 +400,7 @@ void tambahPemain() {
     system("pause");
 }
 
-// Tampilkan daftar pemain tim tertentu
+// Tampilkan daftar pemain tim 
 void tampilinformasitim() {
     system("cls");
     if (jumlahTim == 0) {
@@ -451,7 +449,7 @@ void tampilinformasitim() {
     system("pause");
 }
 
-// Edit data pemain dalam sebuah tim
+// Edit data pemain
 void editPemain() {
     system("cls");
     if (jumlahTim == 0) {
@@ -498,7 +496,6 @@ void editPemain() {
     char namaBaru[50];
     cin.getline(namaBaru, 50);
     if (strlen(namaBaru) > 0) {
-        // Pastikan tidak duplikat nama pemain dalam tim
         if (cariPemain(tim, namaBaru) != -1 && strcmp(namaBaru, p.nama) != 0) {
             cout << "Nama pemain sudah digunakan.\n";
             system("pause");
@@ -527,7 +524,7 @@ void editPemain() {
     system("pause");
 }
 
-// Hapus pemain dari sebuah tim
+// Hapus pemain dari tim
 void hapusPemain() {
     system("cls");
     if (jumlahTim == 0) {
@@ -578,7 +575,6 @@ void hapusPemain() {
     system("pause");
 }
 
-// Tambah hasil pertandingan (update statistik tim)
 void tambahPertandingan() {
     system("cls");
     char tim1[50], tim2[50];
@@ -629,7 +625,7 @@ void tambahPertandingan() {
     system("pause");
 }
 
-// Sorting tim berdasarkan poin (descending)
+// Sorting tim berdasarkan poin
 void sortTim() {
     for (int i = 0; i < jumlahTim - 1; ++i) {
         for (int j = 0; j < jumlahTim - i - 1; ++j) {
