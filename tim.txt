@@ -1,8 +1,15 @@
-Chelsea;1;1;0;0;3;2;3
-Barcelona;0;0;0;0;0;0;0
-Real Madrid;0;0;0;0;0;0;0
-Manchester United;0;0;0;0;0;0;0
-Atletco Madrid;0;0;0;0;0;0;0
-Juventus;0;0;0;0;0;0;0
-Paris Saint German;0;0;0;0;0;0;0
-Aston Villa;1;0;0;1;2;3;0
+Barcelona;0;0;0;0;0;0;0;1
+Lewandoski;12;CF
+Real Madrid;1;1;0;0;4;2;3;0
+Atletico Madrid;0;0;0;0;0;0;0;0
+Inter Milan;0;0;0;0;0;0;0;0
+Ac Milan;0;0;0;0;0;0;0;0
+Arsenal;0;0;0;0;0;0;0;0
+Chelsea;0;0;0;0;0;0;0;0
+Manchester United;0;0;0;0;0;0;0;0
+Manchester City;0;0;0;0;0;0;0;0
+Bayer Munchen;0;0;0;0;0;0;0;0
+Paris Saint German;0;0;0;0;0;0;0;0
+Bayer Leverkusen;0;0;0;0;0;0;0;0
+Borusia Dortmund;0;0;0;0;0;0;0;0
+Juventus;1;0;0;1;2;4;0;0
