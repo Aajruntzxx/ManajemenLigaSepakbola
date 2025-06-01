@@ -14,6 +14,12 @@ struct Pemain {
     char posisi[20];
 };
 
+struct Pelatih {
+    char nama[50];
+    char strategi[50];
+    int pengalaman; // dalam tahun
+};
+
 struct Tim {
     char nama[50];
     int main = 0;
@@ -24,6 +30,8 @@ struct Tim {
     int golKemasukan = 0;
     int poin = 0;
     Pemain daftarPemain[MAKS_PEMAIN_PER_TIM];
+    Pelatih pelatih;
+    bool punyaPelatih = false;
     int jumlahPemain = 0;
 };
 
@@ -60,10 +68,19 @@ void simpanKeFile() {
 
     for (int i = 0; i < jumlahTim; i++) {
         // Simpan data tim
-        fprintf(fp, "%s;%d;%d;%d;%d;%d;%d;%d;%d\n",
+        fprintf(fp, "%s;%d;%d;%d;%d;%d;%d;%d;%d;%d\n",
             daftarTim[i].nama, daftarTim[i].main, daftarTim[i].menang,
             daftarTim[i].seri, daftarTim[i].kalah, daftarTim[i].golMasuk,
-            daftarTim[i].golKemasukan, daftarTim[i].poin, daftarTim[i].jumlahPemain);
+            daftarTim[i].golKemasukan, daftarTim[i].poin, daftarTim[i].jumlahPemain,
+            daftarTim[i].punyaPelatih);
+
+        // Simpan data pelatih jika ada
+        if (daftarTim[i].punyaPelatih) {
+            fprintf(fp, "%s;%s;%d\n",
+                daftarTim[i].pelatih.nama,
+                daftarTim[i].pelatih.strategi,
+                daftarTim[i].pelatih.pengalaman);
+        }
 
         // Simpan data pemain tiap tim
         for (int j = 0; j < daftarTim[i].jumlahPemain; j++) {
@@ -88,12 +105,12 @@ void BacaDariFile() {
     jumlahTim = 0;
     while (!feof(fp) && jumlahTim < MAKS_TIM) {
         char nama[50];
-        int main, menang, seri, kalah, golMasuk, golKemasukan, poin, jumlahPemain;
+        int main, menang, seri, kalah, golMasuk, golKemasukan, poin, jumlahPemain, punyaPelatih;
 
-        int hasil = fscanf(fp, "%49[^;];%d;%d;%d;%d;%d;%d;%d;%d\n",
-            nama, &main, &menang, &seri, &kalah, &golMasuk, &golKemasukan, &poin, &jumlahPemain);
+        int hasil = fscanf(fp, "%49[^;];%d;%d;%d;%d;%d;%d;%d;%d;%d\n",
+            nama, &main, &menang, &seri, &kalah, &golMasuk, &golKemasukan, &poin, &jumlahPemain, &punyaPelatih);
 
-        if (hasil == 9) {
+        if (hasil == 10) {
             strcpy(daftarTim[jumlahTim].nama, nama);
             daftarTim[jumlahTim].main = main;
             daftarTim[jumlahTim].menang = menang;
@@ -103,6 +120,19 @@ void BacaDariFile() {
             daftarTim[jumlahTim].golKemasukan = golKemasukan;
             daftarTim[jumlahTim].poin = poin;
             daftarTim[jumlahTim].jumlahPemain = jumlahPemain;
+            daftarTim[jumlahTim].punyaPelatih = punyaPelatih;
+
+            // Baca data pelatih jika ada
+            if (punyaPelatih) {
+                char namaPelatih[50], strategi[50];
+                int pengalaman;
+                int res = fscanf(fp, "%49[^;];%49[^;];%d\n", namaPelatih, strategi, &pengalaman);
+                if (res == 3) {
+                    strcpy(daftarTim[jumlahTim].pelatih.nama, namaPelatih);
+                    strcpy(daftarTim[jumlahTim].pelatih.strategi, strategi);
+                    daftarTim[jumlahTim].pelatih.pengalaman = pengalaman;
+                }
+            }
 
             // Baca data pemain untuk tim ini
             for (int j = 0; j < jumlahPemain; ++j) {
@@ -157,9 +187,158 @@ void tambahTim() {
     daftarTim[jumlahTim].golKemasukan = 0;
     daftarTim[jumlahTim].poin = 0;
     daftarTim[jumlahTim].jumlahPemain = 0;
+    daftarTim[jumlahTim].punyaPelatih = false;
 
     jumlahTim++;
     cout << "Tim berhasil ditambahkan.\n";
+    simpanKeFile();
+    system("pause");
+}
+
+// Tambah pelatih ke tim
+void tambahPelatih() {
+    system("cls");
+    if (jumlahTim == 0) {
+        cout << "Belum ada tim terdaftar.\n";
+        system("pause");
+        return;
+    }
+
+    char namaTim[50];
+    cout << "===== TAMBAH PELATIH =====\n";
+    cout << "Masukkan nama tim: ";
+    cin.ignore();
+    cin.getline(namaTim, 50);
+
+    int idxTim = cariTim(namaTim);
+    if (idxTim == -1) {
+        cout << "Tim tidak ditemukan.\n";
+        system("pause");
+        return;
+    }
+
+    Tim& tim = daftarTim[idxTim];
+    if (tim.punyaPelatih) {
+        cout << "Tim ini sudah memiliki pelatih. Gunakan menu edit untuk mengubah data pelatih.\n";
+        system("pause");
+        return;
+    }
+
+    cout << "Masukkan nama pelatih: ";
+    char namaPelatih[50];
+    cin.getline(namaPelatih, 50);
+
+    cout << "Masukkan strategi utama: ";
+    char strategi[50];
+    cin.getline(strategi, 50);
+
+    cout << "Masukkan pengalaman (tahun): ";
+    int pengalaman;
+    cin >> pengalaman;
+    cin.ignore();
+
+    strcpy(tim.pelatih.nama, namaPelatih);
+    strcpy(tim.pelatih.strategi, strategi);
+    tim.pelatih.pengalaman = pengalaman;
+    tim.punyaPelatih = true;
+
+    cout << "Pelatih berhasil ditambahkan ke tim " << tim.nama << ".\n";
+    simpanKeFile();
+    system("pause");
+}
+
+// Edit data pelatih
+void editPelatih() {
+    system("cls");
+    if (jumlahTim == 0) {
+        cout << "Belum ada tim terdaftar.\n";
+        system("pause");
+        return;
+    }
+
+    char namaTim[50];
+    cout << "===== EDIT PELATIH =====\n";
+    cout << "Masukkan nama tim: ";
+    cin.ignore();
+    cin.getline(namaTim, 50);
+
+    int idxTim = cariTim(namaTim);
+    if (idxTim == -1) {
+        cout << "Tim tidak ditemukan.\n";
+        system("pause");
+        return;
+    }
+
+    Tim& tim = daftarTim[idxTim];
+    if (!tim.punyaPelatih) {
+        cout << "Tim ini belum memiliki pelatih. Gunakan menu tambah pelatih.\n";
+        system("pause");
+        return;
+    }
+
+    cout << "Data pelatih saat ini:\n";
+    cout << "Nama: " << tim.pelatih.nama << endl;
+    cout << "Strategi: " << tim.pelatih.strategi << endl;
+    cout << "Pengalaman: " << tim.pelatih.pengalaman << " tahun\n\n";
+
+    cout << "Masukkan nama baru (enter jika tidak diubah): ";
+    char namaBaru[50];
+    cin.getline(namaBaru, 50);
+    if (strlen(namaBaru) > 0) {
+        strcpy(tim.pelatih.nama, namaBaru);
+    }
+
+    cout << "Masukkan strategi baru (enter jika tidak diubah): ";
+    char strategiBaru[50];
+    cin.getline(strategiBaru, 50);
+    if (strlen(strategiBaru) > 0) {
+        strcpy(tim.pelatih.strategi, strategiBaru);
+    }
+
+    cout << "Masukkan pengalaman baru (0 jika tidak diubah): ";
+    int pengalamanBaru;
+    cin >> pengalamanBaru;
+    cin.ignore();
+    if (pengalamanBaru > 0) {
+        tim.pelatih.pengalaman = pengalamanBaru;
+    }
+
+    cout << "Data pelatih berhasil diperbarui.\n";
+    simpanKeFile();
+    system("pause");
+}
+
+// Hapus pelatih dari tim
+void hapusPelatih() {
+    system("cls");
+    if (jumlahTim == 0) {
+        cout << "Belum ada tim terdaftar.\n";
+        system("pause");
+        return;
+    }
+
+    char namaTim[50];
+    cout << "===== HAPUS PELATIH =====\n";
+    cout << "Masukkan nama tim: ";
+    cin.ignore();
+    cin.getline(namaTim, 50);
+
+    int idxTim = cariTim(namaTim);
+    if (idxTim == -1) {
+        cout << "Tim tidak ditemukan.\n";
+        system("pause");
+        return;
+    }
+
+    Tim& tim = daftarTim[idxTim];
+    if (!tim.punyaPelatih) {
+        cout << "Tim ini tidak memiliki pelatih.\n";
+        system("pause");
+        return;
+    }
+
+    tim.punyaPelatih = false;
+    cout << "Pelatih berhasil dihapus dari tim.\n";
     simpanKeFile();
     system("pause");
 }
@@ -224,7 +403,7 @@ void tambahPemain() {
 }
 
 // Tampilkan daftar pemain tim tertentu
-void tampilPemain() {
+void tampilinformasitim() {
     system("cls");
     if (jumlahTim == 0) {
         cout << "Belum ada tim terdaftar.\n";
@@ -246,13 +425,22 @@ void tampilPemain() {
     }
 
     Tim& tim = daftarTim[idxTim];
+    
+    cout << "\n=== Informasi Tim " << tim.nama << " ===\n";
+    if (tim.punyaPelatih) {
+        cout << "Pelatih: " << tim.pelatih.nama << " (Strategi: " << tim.pelatih.strategi 
+             << ", Pengalaman: " << tim.pelatih.pengalaman << " tahun)\n";
+    } else {
+        cout << "Tim ini belum memiliki pelatih.\n";
+    }
+
     if (tim.jumlahPemain == 0) {
         cout << "Tim ini belum memiliki pemain.\n";
         system("pause");
         return;
     }
 
-    cout << "Daftar pemain tim " << tim.nama << ":\n";
+    cout << "\nDaftar pemain:\n";
     cout << left << setw(20) << "Nama" << setw(10) << "Nomor" << setw(15) << "Posisi" << endl;
     cout << "======================================\n";
 
@@ -502,7 +690,7 @@ void cariDanTampilkanTim() {
         cout << "Tim tidak ditemukan.\n";
     } else {
         Tim* t = &daftarTim[idx];
-        cout << "\nDetail Tim : " << t->nama << " \n";
+        cout << "\n=== Detail Tim " << t->nama << " ===\n";
         cout << "Main       : " << t->main << endl;
         cout << "Menang     : " << t->menang << endl;
         cout << "Seri       : " << t->seri << endl;
@@ -510,6 +698,16 @@ void cariDanTampilkanTim() {
         cout << "Gol Masuk  : " << t->golMasuk << endl;
         cout << "Gol Kemasuk: " << t->golKemasukan << endl;
         cout << "Poin       : " << t->poin << endl;
+
+        // Tampilkan info pelatih jika ada
+        if (t->punyaPelatih) {
+            cout << "\nPelatih:\n";
+            cout << "Nama       : " << t->pelatih.nama << endl;
+            cout << "Strategi   : " << t->pelatih.strategi << endl;
+            cout << "Pengalaman : " << t->pelatih.pengalaman << " tahun\n";
+        } else {
+            cout << "\nTim ini belum memiliki pelatih.\n";
+        }
 
         if (t->jumlahPemain > 0) {
             cout << "\nDaftar Pemain:\n";
@@ -520,7 +718,7 @@ void cariDanTampilkanTim() {
                 cout << left << setw(20) << p.nama << setw(10) << p.nomor << setw(15) << p.posisi << endl;
             }
         } else {
-            cout << "Tim ini belum memiliki pemain.\n";
+            cout << "\nTim ini belum memiliki pemain.\n";
         }
     }
     system("pause");
@@ -534,12 +732,15 @@ void menu() {
         cout << "===== PROGRAM MANAJEMEN LIGA SEPAKBOLA =====\n";
         cout << "1. Tambah Tim\n";
         cout << "2. Tambah Pemain\n";
-        cout << "3. Edit Pemain\n";
-        cout << "4. Hapus Pemain\n";
-        cout << "5. Tambah Hasil Pertandingan\n";
-        cout << "6. Tampilkan Klasemen\n";
-        cout << "7. Tampilkan Daftar Pemain Tim\n";
-        cout << "8. Cari Tim\n";
+        cout << "3. Tambah Pelatih\n";
+        cout << "4. Edit Pemain\n";
+        cout << "5. Edit Pelatih\n";
+        cout << "6. Hapus Pemain\n";
+        cout << "7. Hapus Pelatih\n";
+        cout << "8. Tambah Hasil Pertandingan\n";
+        cout << "9. Tampilkan Klasemen\n";
+        cout << "10. Tampilkan Informasi Tim\n";
+        cout << "11. Cari Tim\n";
         cout << "0. Keluar\n";
         cout << "Pilihan: ";
         cin >> pilihan;
@@ -551,22 +752,31 @@ void menu() {
             case 2: 
                tambahPemain(); 
                break;
-            case 3: 
-               editPemain(); 
+            case 3:
+               tambahPelatih();
                break;
             case 4: 
-               hapusPemain(); 
+               editPemain(); 
                break;
-            case 5: 
-               tambahPertandingan(); 
+            case 5:
+               editPelatih();
                break;
             case 6: 
-               tampilKlasemen(); 
+               hapusPemain(); 
                break;
-            case 7: 
-               tampilPemain(); 
+            case 7:
+               hapusPelatih();
                break;
             case 8: 
+               tambahPertandingan(); 
+               break;
+            case 9: 
+               tampilKlasemen(); 
+               break;
+            case 10: 
+               tampilinformasitim(); 
+               break;
+            case 11: 
                cariDanTampilkanTim(); 
                break;
             case 0: 
