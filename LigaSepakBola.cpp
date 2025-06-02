@@ -21,33 +21,43 @@ struct Tim {
 Tim daftarTim[MAKS_TIM];
 int jumlahTim = 0;
 
-int cariTimRecursive(const char nama[], int kiri, int kanan) {
-    if (kanan < kiri) return -1;
+int cariTimRekursif(const char nama[], int kiri, int kanan) {
+    if (kanan < kiri) 
+    return -1;
+
     int tengah = kiri + (kanan - kiri) / 2;
     int hasil = strcmp(nama, daftarTim[tengah].nama);
-    if (hasil == 0) return tengah;
-    else if (hasil < 0) return cariTimRecursive(nama, kiri, tengah - 1);
-    else return cariTimRecursive(nama, tengah + 1, kanan);
+
+    if (hasil == 0) 
+    return tengah;
+    else if (hasil < 0) return cariTimRekursif(nama, kiri, tengah - 1);
+    else return cariTimRekursif(nama, tengah + 1, kanan);
 }
 
 void tampilkanSemuaTim(int index = 0) {
-    if (index >= jumlahTim) return;
+    if (index >= jumlahTim) 
+    return;
+
     cout << (index + 1) << ". " << daftarTim[index].nama << endl;
     tampilkanSemuaTim(index + 1);
 }
 
 int totalGolLiga(int index = 0) {
-    if (index >= jumlahTim) return 0;
+    if (index >= jumlahTim) 
+    return 0;
+
     return daftarTim[index].golMasuk + totalGolLiga(index + 1);
 }
 
 int cariTimTerbaik(int index = 0, int indexTerbaik = 0) {
-    if (index >= jumlahTim) return indexTerbaik;
+    if (index >= jumlahTim) 
+    return indexTerbaik;
+
     int newIndexTerbaik = (daftarTim[index].poin > daftarTim[indexTerbaik].poin) ? index : indexTerbaik;
     return cariTimTerbaik(index + 1, newIndexTerbaik);
 }
 
-void urutkanTimRecursive(int n) {
+void urutkanTimRekursif(int n) {
     if (n <= 1) return;
     for (int i = 0; i < n - 1; i++) {
         if (daftarTim[i].poin < daftarTim[i + 1].poin) {
@@ -56,7 +66,7 @@ void urutkanTimRecursive(int n) {
             daftarTim[i + 1] = temp;
         }
     }
-    urutkanTimRecursive(n - 1);
+    urutkanTimRekursif(n - 1);
 }
 
 int cariTim(const char nama[]) {
@@ -207,7 +217,7 @@ void tambahPertandingan() {
 
 void tampilKlasemen() {
     system("cls");
-    urutkanTimRecursive(jumlahTim);
+    urutkanTimRekursif(jumlahTim);
 
     cout << "\n===== Klasemen Liga =====\n";
     cout << left << setw(20) << "Tim"
@@ -243,12 +253,13 @@ void cariDanTampilkanTim() {
     system("cls");
     char namaCari[50];
     cout << "===== MENCARI TIM =====\n";
+    tampilkanSemuaTim();
     cout << "Masukkan nama tim yang dicari: ";
     cin.ignore();
     cin.getline(namaCari, 50);
 
     urutkanNamaTim();
-    int idx = cariTimRecursive(namaCari, 0, jumlahTim - 1);
+    int idx = cariTimRekursif(namaCari, 0, jumlahTim - 1);
 
     if (idx == -1) {
         cout << "Tim tidak ditemukan.\n";
@@ -339,14 +350,30 @@ void menu() {
         cin >> pilihan;
 
         switch (pilihan) {
-            case 1: tambahTim(); break;
-            case 2: tambahPertandingan(); break;
-            case 3: tampilKlasemen(); break;
-            case 4: cariDanTampilkanTim(); break;
-            case 5: editTim(); break;
-            case 6: hapusTim(); break;
-            case 0: cout << "Keluar dari program.\n"; break;
-            default: cout << "Pilihan tidak valid.\n"; system("pause");
+            case 1: 
+               tambahTim(); 
+               break;
+            case 2: 
+               tambahPertandingan(); 
+               break;
+            case 3: 
+               tampilKlasemen(); 
+               break;
+            case 4: 
+               cariDanTampilkanTim(); 
+               break;
+            case 5: 
+               editTim(); 
+               break;
+            case 6: 
+               hapusTim(); 
+               break;
+            case 0: 
+               cout << "Keluar dari program.\n"; 
+               break;
+            default: 
+               cout << "Pilihan tidak valid.\n"; 
+               system("pause");
         }
 
     } while (pilihan != 0);
