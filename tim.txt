@@ -1,12 +1,12 @@
+Napoli;1;0;1;0;3;3;1;0;0
+Juventus;1;0;1;0;3;3;1;0;0
 Barcelona;0;0;0;0;0;0;0;1;1
 Hansi Flick;Tiki Taka;20
-Lamine Yamal;18;LWF
+Gavi;25;CMF
 Real Madrid;0;0;0;0;0;0;0;0;0
 Atletico Madrid;0;0;0;0;0;0;0;0;0
 Ac Milan;0;0;0;0;0;0;0;0;0
 Inter Milan;0;0;0;0;0;0;0;0;0
-Napoli;0;0;0;0;0;0;0;0;0
-Juventus;0;0;0;0;0;0;0;0;0
 Manchester United;0;0;0;0;0;0;0;0;0
 Manchester City;0;0;0;0;0;0;0;0;0
 Aston Villa;0;0;0;0;0;0;0;0;0
