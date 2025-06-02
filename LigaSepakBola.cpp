@@ -148,7 +148,9 @@ void tambahTim() {
         return;
     }
 
-    cout << "===== TAMBAH DAFTAR TIM =====\n";
+    cout << "===================================\n";
+    cout << "|        TAMBAH DAFTAR TIM        |\n";
+    cout << "===================================\n";
     cout << "Masukkan nama tim: ";
     cin.ignore();
     cin.getline(daftarTim[jumlahTim].nama, 50);
@@ -170,7 +172,9 @@ void tambahPertandingan() {
     char tim1[50], tim2[50];
     int skor1, skor2;
 
-    cout << "===== MENAMBAHKAN PERTANDINGAN =====\n";
+    cout << "===================================\n";
+    cout << "|     MENAMBAHKAN PERTANDINGAN    |\n";
+    cout << "===================================\n";
     cout << "Nama tim 1: ";
     cin.ignore();
     cin.getline(tim1, 50);
@@ -252,8 +256,11 @@ void tampilKlasemen() {
 void cariDanTampilkanTim() {
     system("cls");
     char namaCari[50];
-    cout << "===== MENCARI TIM =====\n";
+    cout << "===================================\n";
+    cout << "|            DAFTAR TIM           |\n";
+    cout << "===================================\n";
     tampilkanSemuaTim();
+    cout <<"=================================\n";
     cout << "Masukkan nama tim yang dicari: ";
     cin.ignore();
     cin.getline(namaCari, 50);
@@ -279,8 +286,11 @@ void cariDanTampilkanTim() {
 void editTim() {
     system("cls");
     char namaLama[50];
-    cout << " ===== MENGEDIT TIM =====\n";
+    cout << "===================================\n";
+    cout << "|            DAFTAR TIM           |\n";
+    cout << "===================================\n";
     tampilkanSemuaTim();
+    cout <<"===============================\n";
     cout << "Masukkan nama tim yang ingin diedit: ";
     cin.ignore();
     cin.getline(namaLama, 50);
@@ -311,8 +321,11 @@ void editTim() {
 void hapusTim() {
     system("cls");
     char namaHapus[50];
-    cout << " ===== HAPUS TIM ===== \n";
+    cout << "===================================\n";
+    cout << "|           DAFTAR TIM            |\n";
+    cout << "===================================\n";
     tampilkanSemuaTim();
+    cout <<"===============================\n";
     cout << "Masukkan nama tim yang ingin dihapus: ";
     cin.ignore();
     cin.getline(namaHapus, 50);
@@ -338,14 +351,17 @@ void menu() {
     int pilihan;
     do {
         system("cls");
-        cout << "\n===== Menu Manajemen Liga =====\n";
-        cout << "1. Tambah Tim\n";
-        cout << "2. Tambah Pertandingan\n";
-        cout << "3. Tampilkan Klasemen\n";
-        cout << "4. Cari Tim\n";
-        cout << "5. Edit Tim\n";
-        cout << "6. Hapus Tim\n";
-        cout << "0. Keluar\n";
+        cout << "===================================\n";
+        cout << "|        Menu Manajemen Liga      | \n";
+        cout << "===================================\n";
+        cout << "| 1. Tambah Tim                   |\n";
+        cout << "| 2. Tambah Pertandingan          |\n";
+        cout << "| 3. Tampilkan Klasemen           |\n";
+        cout << "| 4. Cari Tim                     |\n";
+        cout << "| 5. Edit Tim                     |\n";
+        cout << "| 6. Hapus Tim                    |\n";
+        cout << "| 0. Keluar                       |\n";
+        cout << "===================================\n";
         cout << "Pilihan: ";
         cin >> pilihan;
 
