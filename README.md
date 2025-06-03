@@ -9,6 +9,7 @@ Menu Utama
 - Menambah hasil pertandingan antar tim
 - Menampilkan klasemen liga berdasarkan poin
 - Mencari dan menampilkan detail sebuah tim
-- Menghapus dan mengedit Tim Berdasarkan Nama 
+- Menghapus dan mengedit Tim Berdasarkan Nama
+- Mengupdate Tim
 - Menyimpan dan memuat data tim ke/dari file menggunakan operasi file `fopen`, `fprintf`, dan `fscanf`
 
