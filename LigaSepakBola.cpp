@@ -42,21 +42,6 @@ void tampilkanSemuaTim(int index = 0) {
     tampilkanSemuaTim(index + 1);
 }
 
-int totalGolLiga(int index = 0) {
-    if (index >= jumlahTim) 
-    return 0;
-
-    return daftarTim[index].golMasuk + totalGolLiga(index + 1);
-}
-
-int cariTimTerbaik(int index = 0, int indexTerbaik = 0) {
-    if (index >= jumlahTim) 
-    return indexTerbaik;
-
-    int newIndexTerbaik = (daftarTim[index].poin > daftarTim[indexTerbaik].poin) ? index : indexTerbaik;
-    return cariTimTerbaik(index + 1, newIndexTerbaik);
-}
-
 void urutkanTimRekursif(int n) {
     if (n <= 1) return;
     for (int i = 0; i < n - 1; i++) {
@@ -242,13 +227,6 @@ void tampilKlasemen() {
              << setw(5) << t->golMasuk << " " << setw(4) << t->golKemasukan
              << setw(6) << t->poin << endl;
     }
-
-    cout << "\n===== Informasi Tambahan =====\n";
-    cout << "Total gol dalam liga: " << totalGolLiga() << endl;
-    int idxTerbaik = cariTimTerbaik();
-    cout << "Tim terbaik saat ini: " << daftarTim[idxTerbaik].nama 
-         << " (" << daftarTim[idxTerbaik].poin << " poin)\n";
-
     cout << "===============================================\n";
     system("pause");
 }
