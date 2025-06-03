@@ -1,15 +1,14 @@
+Bayer Leverkusen;0;0;0;0;0;0;0
+Real Madrid;0;0;0;0;0;0;0
 Ac Milan;0;0;0;0;0;0;0
 As Roma;0;0;0;0;0;0;0
 Aston Villa;0;0;0;0;0;0;0
 Atletico Madrid;0;0;0;0;0;0;0
 Barcelona;1;0;0;1;3;4;0
 Bayer Munchen;0;0;0;0;0;0;0
-Bayer leverkusen;0;0;0;0;0;0;0
 Chelsea;0;0;0;0;0;0;0
 Inter Milan;0;0;0;0;0;0;0
 Juventus;0;0;0;0;0;0;0
 Liverpool;0;0;0;0;0;0;0
 Napoli;0;0;0;0;0;0;0
 Paris Saint German;0;0;0;0;0;0;0
-Real Madrid;1;1;0;0;4;3;3
-;0;0;0;0;0;0;0

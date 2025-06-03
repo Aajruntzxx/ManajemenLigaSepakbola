@@ -345,7 +345,45 @@ void hapusTim() {
     cout << "Tim berhasil dihapus.\n";
     simpanKeFile();
     system("pause");
+
 }
+
+void updateTim() {
+    system("cls");
+    char namaUpdate[50];
+    cout << "===================================\n";
+    cout << "|           DAFTAR TIM            |\n";
+    cout << "===================================\n";
+    tampilkanSemuaTim();
+    cout << "===============================\n";
+    cout << "Masukkan nama tim yang ingin diupdate: ";
+    cin.ignore();
+    cin.getline(namaUpdate, 50);
+
+    int idx = cariTim(namaUpdate);
+    if (idx == -1) {
+        cout << "Tim tidak ditemukan.\n";
+        system("pause");
+        return;
+    }
+
+    Tim* t = &daftarTim[idx];
+    cout << "\n== Update Data Tim: " << t->nama << " ==\n";
+    cout << "Masukkan jumlah main         : "; cin >> t->main;
+    cout << "Masukkan jumlah menang       : "; cin >> t->menang;
+    cout << "Masukkan jumlah seri         : "; cin >> t->seri;
+    cout << "Masukkan jumlah kalah        : "; cin >> t->kalah;
+    cout << "Masukkan jumlah gol masuk    : "; cin >> t->golMasuk;
+    cout << "Masukkan jumlah gol kemasukan: "; cin >> t->golKemasukan;
+
+    // Hitung ulang poin
+    t->poin = t->menang * 3 + t->seri;
+
+    cout << "Data tim berhasil diupdate.\n";
+    simpanKeFile();
+    system("pause");
+}
+
 
 void menu() {
     int pilihan;
@@ -359,7 +397,8 @@ void menu() {
         cout << "| 3. Tampilkan Klasemen           |\n";
         cout << "| 4. Cari Tim                     |\n";
         cout << "| 5. Edit Tim                     |\n";
-        cout << "| 6. Hapus Tim                    |\n";
+        cout << "| 6. Update Tim                   |\n";
+        cout << "| 7. Hapus Tim                    |\n";
         cout << "| 0. Keluar                       |\n";
         cout << "===================================\n";
         cout << "Pilihan: ";
@@ -382,6 +421,9 @@ void menu() {
                editTim(); 
                break;
             case 6: 
+               updateTim(); 
+               break;
+            case 7: 
                hapusTim(); 
                break;
             case 0: 
